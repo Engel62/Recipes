@@ -7,10 +7,10 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 @Data
 @AllArgsConstructor
-public class Recipes {
+public class   Recipes {
     private String name;
     private int cookingTime;
     private  ArrayList<Ingredient>ingredients;
-    private String[] cookingSteps;
+    private ArrayList<String> cookingSteps;
 
 }
