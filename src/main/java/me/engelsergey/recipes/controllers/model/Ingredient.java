@@ -1,7 +1,7 @@
 package me.engelsergey.recipes.controllers.model;
 
 public class Ingredient {
-    public static String name;
-    public static int numberOfIngredients;
-    public static String unitOfMeasurement;
+    private String name;
+    private int numberOfIngredients;
+    private String unitOfMeasurement;
 }
