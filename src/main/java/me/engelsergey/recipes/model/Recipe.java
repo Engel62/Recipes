@@ -1,13 +1,12 @@
-package me.engelsergey.recipes.controllers.model;
+package me.engelsergey.recipes.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 @Data
 @AllArgsConstructor
-public class   Recipes {
+public class Recipe {
     private String name;
     private int cookingTime;
     private  ArrayList<Ingredient>ingredients;

@@ -1,4 +1,4 @@
-package me.engelsergey.recipes.controllers.model;
+package me.engelsergey.recipes.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
