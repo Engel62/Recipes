@@ -26,4 +26,20 @@ public class RecipeController {
         }
         return ResponseEntity.ok(recipe);
     }
+    @PutMapping("/{recipeNumber}")
+    public ResponseEntity<Recipe> editRecipe(@PathVariable long recipeNumber, @RequestBody Recipe recipe) {
+        Recipe recipe1 = recipeService.editRecipe(recipeNumber, recipe);
+        if (recipe1 == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(recipe1);
+    }
+
+    @DeleteMapping("/{recipeNumber}")
+    public ResponseEntity<Void> deleteRecipeById(@PathVariable long recipeNumber) {
+        if (recipeService.deleteRecipeById(recipeNumber)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
 }
