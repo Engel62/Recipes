@@ -2,6 +2,7 @@ package me.engelsergey.recipes.service.impl;
 
 import me.engelsergey.recipes.model.Recipe;
 import me.engelsergey.recipes.service.RecipeService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -17,11 +18,13 @@ public class RecipeServiceImpl implements RecipeService {
     }
 @Override
     public Recipe getRecipe(long recipeNumber) {
+    ObjectUtils.isNotEmpty(recipes);
         return recipes.get(recipeNumber);
     }
 
     @Override
     public Recipe editRecipe(long recipeNumber, Recipe recipe) {
+        ObjectUtils.isNotEmpty(recipes);
         if (recipes.containsKey(recipeNumber)) {
             recipes.put(recipeNumber, recipe);
             return recipe;
@@ -31,6 +34,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     public boolean deleteRecipeById(long recipeNumber) {
+        ObjectUtils.isNotEmpty(recipes);
         if (recipes.containsKey(recipeNumber)) {
             recipes.remove(recipeNumber);
             return true;

@@ -2,6 +2,7 @@ package me.engelsergey.recipes.service.impl;
 
 import me.engelsergey.recipes.model.Ingredient;
 import me.engelsergey.recipes.service.IngredientService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -20,11 +21,13 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public Ingredient getIngredient(long ingredientNumber) {
+        ObjectUtils.isNotEmpty(ingredients);
         return ingredients.get(ingredientNumber);
     }
 
     @Override
     public Ingredient editIngredient(long ingredientNumber, Ingredient ingredient) {
+        ObjectUtils.isNotEmpty(ingredients);
         if (ingredients.containsKey(ingredientNumber)) {
             ingredients.put(ingredientNumber, ingredient);
             return ingredient;
@@ -34,6 +37,7 @@ public class IngredientServiceImpl implements IngredientService {
 
     @Override
     public boolean deleteIngredientById(long ingredientNumber) {
+        ObjectUtils.isNotEmpty(ingredients);
         if (ingredients.containsKey(ingredientNumber)) {
             ingredients.remove(ingredientNumber);
             return true;
