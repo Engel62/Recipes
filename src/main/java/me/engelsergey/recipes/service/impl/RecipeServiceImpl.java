@@ -1,19 +1,26 @@
 package me.engelsergey.recipes.service.impl;
 
 import me.engelsergey.recipes.model.Recipe;
+import me.engelsergey.recipes.service.RecipeFilesService;
 import me.engelsergey.recipes.service.RecipeService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 @Service
 public class RecipeServiceImpl implements RecipeService {
+    private final RecipeFilesService recipeFilesService;
     private static Map<Long, Recipe> recipes = new HashMap<>();
     private static long recipeNumber = 0;
-@Override
+
+    public RecipeServiceImpl(RecipeFilesService recipeFilesService) {
+        this.recipeFilesService = recipeFilesService;
+    }
+
+    @Override
     public Recipe addRecipe(Recipe recipe) {
     recipes.put(recipeNumber++, recipe);
+
     return recipe;
     }
 @Override
