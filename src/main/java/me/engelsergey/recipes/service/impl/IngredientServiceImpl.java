@@ -23,10 +23,10 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
 
-    @PostConstruct
-    private void init() {
-        readFromFile();
-    }
+  @PostConstruct
+  private void init() {
+       readFromFile();
+   }
 
     @Override
     public Ingredient addIngredient(Ingredient ingredient) {
@@ -69,11 +69,6 @@ public class IngredientServiceImpl implements IngredientService {
         return false;
     }
 
-    @Override
-    public void deleteAllIngredients() {
-        ingredients = new HashMap<>();
-        saveToFile();
-    }
 
     private void saveToFile() {
         try {

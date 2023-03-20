@@ -15,5 +15,4 @@ public interface IngredientService {
 
     boolean deleteIngredientById(long ingredientNumber);
 
-    void deleteAllIngredients();
 }
