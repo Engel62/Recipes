@@ -10,6 +10,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 @Service
@@ -23,10 +24,13 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
 
-  @PostConstruct
-  private void init() {
-       readFromFile();
-   }
+    @PostConstruct
+    private void init(){
+        File file = ingredientFilesService.getDataFile();
+        if (file.exists()) {
+            ingredientFilesService.readFromFile();
+        }
+    }
 
     @Override
     public Ingredient addIngredient(Ingredient ingredient) {

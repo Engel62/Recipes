@@ -1,10 +1,10 @@
 package me.engelsergey.recipes.service.impl;
 
 import me.engelsergey.recipes.service.IngredientFilesService;
-import me.engelsergey.recipes.service.IngredientService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,6 +34,10 @@ public class IngredientFilesServiceImpl implements IngredientFilesService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    @Override
+    public File getDataFile() {
+        return new File(ingredientsFilePath, ingredientsFileName);
     }
 
     private boolean cleanDataFile() {

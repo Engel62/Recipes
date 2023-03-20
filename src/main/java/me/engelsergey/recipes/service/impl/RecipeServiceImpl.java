@@ -22,8 +22,11 @@ public class RecipeServiceImpl implements RecipeService {
         this.recipeFilesService = recipeFilesService;
     }
     @PostConstruct
-    private void init() {
-        readFromFile();
+    private void init(){
+        File file = recipeFilesService.getDataFile();
+        if (file.exists()) {
+            recipeFilesService.readFromFile();
+        }
     }
 
     @Override
@@ -77,5 +80,7 @@ public class RecipeServiceImpl implements RecipeService {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }
