@@ -1,15 +1,20 @@
 package me.engelsergey.recipes.service.impl;
 
 import me.engelsergey.recipes.service.RecipeFilesService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
 @Service
 public class RecipeFilesServiceImpl implements RecipeFilesService {
+
     @Value("${path.to.files.folder}")
     private String recipesFilePath;
 
@@ -35,12 +40,14 @@ public class RecipeFilesServiceImpl implements RecipeFilesService {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public File getDataFile() {
-        return new File(recipesFilePath, recipesFileName);
+        return new File(recipesFilePath + "/" + recipesFileName);
     }
 
-    private boolean cleanDataFile() {
+    @Override
+    public boolean cleanDataFile() {
         try {
             Path path = Path.of(recipesFilePath, recipesFileName);
             Files.deleteIfExists(path);
@@ -52,4 +59,16 @@ public class RecipeFilesServiceImpl implements RecipeFilesService {
         }
     }
 
+    @Override
+    public boolean uploadDataFile(MultipartFile file) {
+        cleanDataFile();
+        File dataFile = getDataFile();
+        try (FileOutputStream fos = new FileOutputStream(dataFile)) {
+            IOUtils.copy(file.getInputStream(), fos);
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
