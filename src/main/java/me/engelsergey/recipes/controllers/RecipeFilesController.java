@@ -21,7 +21,7 @@ import java.io.*;
 
 @RestController
 @RequestMapping("/recipe/files")
-@Tag(name = "Recipes files controller", description = "Operations with recipes file")
+@Tag(name = "Контроллер файлов рецептов", description = "Операции с файлом рецептов")
 public class RecipeFilesController {
     private final RecipeFilesService recipeFilesService;
 
@@ -31,13 +31,13 @@ public class RecipeFilesController {
 
     @GetMapping("export")
     @Operation(
-            summary = "Downloading recipes file",
-            description = " Download recipes file"
+            summary = "Загрузка файла рецептов",
+            description = "Скачать файл рецептов"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "Recipes file was successfully downloaded",
+                    description = "Файл рецептов был успешно загружен",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -48,7 +48,7 @@ public class RecipeFilesController {
             ),
             @ApiResponse(
                     responseCode = "204",
-                    description = "Recipes file has no content",
+                    description = "Файл рецептов не содержит содержимого",
                     content = {
                             @Content(
                                     mediaType = "application/json",
@@ -74,19 +74,20 @@ public class RecipeFilesController {
 
     @PostMapping(value = "/import", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @Operation(
-            summary = "Uploading new recipes file",
-            description = "Upload new recipes file"
+            summary = "Загрузка нового файла рецептов",
+            description = "Загрузить новый файл рецептов"
     )
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
-                    description = "New recipes file was successfully uploaded"
+                    description = "Новый файл рецептов был успешно загружен"
             ),
             @ApiResponse(
                     responseCode = "500",
-                    description = "Internal server error"
+                    description = "Внутренняя ошибка сервера"
             )
     })
+
     public ResponseEntity<Void> uploadDataFIle(@RequestParam MultipartFile file) {
         recipeFilesService.uploadDataFile(file);
         if (file.getResource().exists()) {
